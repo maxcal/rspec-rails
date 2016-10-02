@@ -14,7 +14,9 @@ when /master/
   gem 'sprockets', :git => 'git://github.com/rails/sprockets.git', :branch => 'master'
   gem 'sprockets-rails', :git => 'git://github.com/rails/sprockets-rails.git', :branch => 'master'
 when /stable$/
-  gem "rails", :git => "git://github.com/rails/rails.git", :branch => version
+  %w[rails railties actionmailer actionpack actionview activejob activerecord activesupport].each do |rails_gem|
+    gem rails_gem, :git => "git://github.com/rails/rails.git", :branch => version
+  end
 when nil, false, ""
   if RUBY_VERSION < '1.9.3'
     # Rails 4+ requires 1.9.3+, so on earlier versions default to the last 3.x release.
